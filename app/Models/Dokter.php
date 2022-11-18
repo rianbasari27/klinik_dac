@@ -17,6 +17,6 @@ class Dokter extends Model
 
     public function berobat()
     {
-        return $this->hasMany(Berobat::class);
+        return $this->hasMany(Berobat::class, 'nama_dokter_id');
     }
 }

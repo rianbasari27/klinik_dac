@@ -24,7 +24,7 @@
                 <td>{{ $data->deskripsi }}</td>
             </tr>
         </table>
-        <a href="/pasien" class="btn btn-sm btn-warning my-2">Kembali</a>
+        <a href="/obat" class="btn btn-sm btn-warning my-2">Kembali</a>
     </div>
 </div>
 @endsection

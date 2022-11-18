@@ -62,6 +62,7 @@ class BerobatController extends Controller
         Session::flash('keluhan', $request->keluhan);
         Session::flash('nama_dokter_id', $request->nama_dokter_id);
         Session::flash('hasil_periksa', $request->hasil_periksa);
+        Session::flash('confirm_rujuk', $request->confirm_rujuk);
         Session::flash('nama_obat_id', $request->nama_obat_id);
         Session::flash('nama_rs_id', $request->nama_rs_id);
         Session::flash('biaya', $request->biaya);
@@ -72,6 +73,7 @@ class BerobatController extends Controller
             'keluhan' => 'required',
             'nama_dokter_id' => 'required',
             'hasil_periksa' => 'required',
+            'confirm_rujuk' => 'required',
             'biaya' => 'required|numeric',
         ],[
             'nama_pasien_id.required' => 'Pilih pasien!',
@@ -79,6 +81,7 @@ class BerobatController extends Controller
             'keluhan.required' => 'Masukan keluhan pasien!',
             'nama_dokter_id.required' => 'Pilih dokter!',
             'hasil_periksa.required' => 'Masukan hasil periksa!',
+            'confirm_rujuk' => 'Pilih rujuk!',
             'biaya.required' => 'Masukkan jumlah biaya!',
             'biaya.numeric' => 'Biaya harus berupa angka!',
         ]);
@@ -89,6 +92,7 @@ class BerobatController extends Controller
             'keluhan' => $request->input('keluhan'),
             'nama_dokter_id' => $request->input('nama_dokter_id'),
             'hasil_periksa' => $request->input('hasil_periksa'),
+            'confirm_rujuk' => $request->input('confirm_rujuk'),
             'nama_obat_id' => $request->input('nama_obat_id'),
             'nama_rs_id' => $request->input('nama_rs_id'),
             'biaya' => $request->input('biaya')
@@ -105,7 +109,12 @@ class BerobatController extends Controller
      */
     public function show($id)
     {
-        //
+        $title = 'Data Berobat';
+        $data = Berobat::where('id', $id)->first();
+        return view('berobat.detail')->with([
+            'data' => $data,
+            'title' => $title
+        ]);
     }
 
     /**
@@ -116,7 +125,20 @@ class BerobatController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = "Data Berobat";
+        $pasien = Pasien::all();
+        $dokter = Dokter::all();
+        $obat = Obat::all();
+        $rs_rujuk = Rs_rujuk::all();
+        $berobat = Berobat::where('id', $id)->first();;
+        return view('berobat.edit')->with([
+            'title' => $title,
+            'pasien' => $pasien,
+            'dokter' => $dokter,
+            'obat' => $obat,
+            'rs_rujuk' => $rs_rujuk,
+            'berobat' => $berobat
+        ]);
     }
 
     /**
@@ -128,7 +150,39 @@ class BerobatController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama_pasien_id' => 'required',
+            'tanggal_berobat' => 'required',
+            'keluhan' => 'required',
+            'nama_dokter_id' => 'required',
+            'hasil_periksa' => 'required',
+            'confirm_rujuk' => 'required',
+            'biaya' => 'required|numeric',
+        ],[
+            'nama_pasien_id.required' => 'Pilih pasien!',
+            'tanggal_berobat.required' => 'Tentukan tanggal berobat!',
+            'keluhan.required' => 'Masukan keluhan pasien!',
+            'nama_dokter_id.required' => 'Pilih dokter!',
+            'hasil_periksa.required' => 'Masukan hasil periksa!',
+            'confirm_rujuk' => 'Pilih rujuk!',
+            'biaya.required' => 'Masukkan jumlah biaya!',
+            'biaya.numeric' => 'Biaya harus berupa angka!',
+        ]);
+
+        $data = [
+            'nama_pasien_id' => $request->input('nama_pasien_id'),
+            'tanggal_berobat' => $request->input('tanggal_berobat'),
+            'keluhan' => $request->input('keluhan'),
+            'nama_dokter_id' => $request->input('nama_dokter_id'),
+            'hasil_periksa' => $request->input('hasil_periksa'),
+            'confirm_rujuk' => $request->input('confirm_rujuk'),
+            'nama_obat_id' => $request->input('nama_obat_id'),
+            'nama_rs_id' => $request->input('nama_rs_id'),
+            'biaya' => $request->input('biaya')
+        ];
+
+        Berobat::where('id', $id)->update($data);
+        return redirect('berobat')->with('success', 'Berhasil melakukan update data.');
     }
 
     /**
@@ -139,6 +193,7 @@ class BerobatController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Berobat::where('id', $id)->delete();
+        return redirect('/berobat')->with('success', 'Data berhasil dihapus.');
     }
 }

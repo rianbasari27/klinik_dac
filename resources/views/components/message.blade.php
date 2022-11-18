@@ -6,7 +6,6 @@
             @endforeach
         </ul>
     </div>
-    
 @endif
 
 @if (Session::get('success'))

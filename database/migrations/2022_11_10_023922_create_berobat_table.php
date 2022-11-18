@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('keluhan');
             $table->unsignedBigInteger('nama_dokter_id');
             $table->string('hasil_periksa');
+            $table->tinyInteger('confirm_rujuk');
             $table->unsignedBigInteger('nama_obat_id')->nullable();
             $table->unsignedBigInteger('nama_rs_id')->nullable();
             $table->integer('biaya');
