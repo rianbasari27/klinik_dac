@@ -20,9 +20,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // Pasien::factory()->count(5)->create();
-        // Dokter::factory()->count(5)->create();
-        // Rs_rujuk::factory()->count(5)->create();
+        Pasien::factory()->count(5)->create();
+        Dokter::factory()->count(5)->create();
+        Rs_rujuk::factory()->count(5)->create();
 
         // Insert tabel obat
         DB::table('obat')->insert([
