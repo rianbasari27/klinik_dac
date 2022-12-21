@@ -1,0 +1,39 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+
+body {
+    background-color: #edf0f7;
+}
+
+th {
+    font-weight: 700;
+}
+
+.menu {
+    text-decoration: none;
+    color: rgb(197, 197, 197);
+    border-radius: 10px;
+    transition: 0.25s;
+}
+
+.menu:hover {
+    color: #0d6efd;
+    transition: 0.25s;
+    background-color: #ccd2f6;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.menu-active {
+    color: #0d6efd;
+    transition: 0.25s;
+    background-color: #ccd2f6;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.icon-active {
+    color: white;
+}

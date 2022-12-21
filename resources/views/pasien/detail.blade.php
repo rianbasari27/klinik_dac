@@ -1,8 +1,8 @@
-@extends('shared.layout')
+@extends('shared.main')
 
 @section('main-content')
-<h1>Detail Pasien</h1>
-<div class="row my-2">
+<h1 class="text-center">Detail Pasien</h1>
+<div class="row my-2 justify-content-center">
     <div class="col-md-6 mt-3 py-5 px-5 bg-light rounded-4 shadow">
         <h3>{{ $data->nama_pasien }}</h3>
         <hr>
@@ -28,7 +28,7 @@
                 <td>{{ $data->email }}</td>
             </tr>
         </table>
-        <a href="/pasien" class="btn btn-sm btn-warning my-2">Kembali</a>
+        <a href="/pasien" class="btn btn-warning shadow my-2">Kembali</a>
     </div>
 </div>
 @endsection

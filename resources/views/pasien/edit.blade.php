@@ -1,9 +1,8 @@
-@extends('shared.layout')
+@extends('shared.main')
 
 @section('main-content')
-<h1>Edit Data Pasien</h1>
-<a href="/pasien" class="btn btn-sm btn-warning my-2">Kembali</a>
-<div class="row my-2">
+<h1 class="text-center">Edit Data Pasien</h1>
+<div class="row my-2 justify-content-center">
     <div class="col-md-5 mt-3 py-5 px-5 bg-light rounded-4 shadow">
         <form action="{{ '/pasien/'.$data->id }}" method="post">
             @csrf
@@ -40,8 +39,8 @@
                 <input type="email" class="form-control" id="email" name="email" value="{{ $data->email }}">
             </div>
             <div class="mb-3">
-                <input type="submit" name="submit" class="btn btn-success" value="Edit">
-                <input type="reset" name="reset" class="btn btn-outline-danger" value="Bersih">
+                <input type="submit" name="submit" class="btn btn-success shadow" value="Simpan">
+                <a href="/pasien" class="btn btn-outline-danger my-2">Kembali</a>
             </div>
         </form>
     </div>

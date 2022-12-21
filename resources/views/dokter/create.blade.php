@@ -1,4 +1,4 @@
-@extends('shared.layout')
+@extends('shared.main')
 
 @section('main-content')
 <h1>Data Dokter Baru</h1>

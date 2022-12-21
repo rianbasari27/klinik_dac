@@ -21,7 +21,10 @@ class BerobatController extends Controller
     public function index()
     {
         $title = "Data Berobat";
-        $data = Berobat::orderBy('updated_at', 'desc')->paginate(5);
+        $data = Berobat::orderBy('berobat.updated_at', 'desc')
+            ->join('pasien', 'pasien.id', '=', 'berobat.nama_pasien_id')
+            ->paginate(5);
+        // $data = Berobat::orderBy('updated_at', 'desc')->paginate(5);
         return view('berobat.index')->with([
             'data' => $data,
             'title' => $title

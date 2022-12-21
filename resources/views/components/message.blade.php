@@ -1,13 +1,11 @@
 @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $item)
-                <li>{{ $item }}</li>
-            @endforeach
-        </ul>
+    <div>
+        @foreach ($errors->all() as $item)
+            <div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i> {{ $item }}</div>
+        @endforeach
     </div>
 @endif
 
 @if (Session::get('success'))
-    <div class="alert alert-success">{{ Session::get('success') }}</div>
+    <div class="alert alert-success"><i class="fas fa-check-circle"></i> {{ Session::get('success') }}</div>
 @endif
