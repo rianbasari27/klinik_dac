@@ -80,7 +80,12 @@ class Rs_RujukController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = "Data Rumah Sakit Rujukan";
+        $data = Rs_rujuk::where('id', $id)->first();
+        return view('rs_rujuk.edit')->with([
+            'data' => $data,
+            'title' => $title
+        ]);
     }
 
     /**
@@ -92,7 +97,21 @@ class Rs_RujukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama_rs' => 'required',
+            'alamat' => 'required',
+        ],[
+            'nama_rs.required' => 'Nama pasien wajib diisi!',
+            'alamat.required' => 'Alamat pasien wajib diisi!',
+        ]);
+
+        $data = [
+            'nama_rs' => $request->input('nama_rs'),
+            'alamat' => $request->input('alamat'),
+        ];
+
+        Rs_rujuk::where('id', $id)->update($data);
+        return redirect('/rs_rujuk')->with('success', 'Berhasil melakukan update data.');
     }
 
     /**
@@ -103,6 +122,7 @@ class Rs_RujukController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Rs_rujuk::where('id', $id)->delete();
+        return redirect('/rs_rujuk')->with('success', 'Data berhasil dihapus.');
     }
 }

@@ -4,12 +4,13 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Obat;
 use App\Models\Dokter;
 use App\Models\Pasien;
 use App\Models\Rs_rujuk;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,9 +21,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Pasien::factory()->count(5)->create();
+        Pasien::factory()->count(100)->create();
         Dokter::factory()->count(5)->create();
-        Rs_rujuk::factory()->count(5)->create();
+        Rs_rujuk::factory()->count(10)->create();
+        User::factory()->count(1)->create();
 
         // Insert tabel obat
         DB::table('obat')->insert([
@@ -43,7 +45,6 @@ class DatabaseSeeder extends Seeder
             'stok' => '19',
             'created_at' => date('Y/m/d H:i:s'),
             'updated_at' => date('Y/m/d H:i:s')
-        ]);
-        
+        ]);        
     }
 }

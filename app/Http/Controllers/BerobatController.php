@@ -21,10 +21,18 @@ class BerobatController extends Controller
     public function index()
     {
         $title = "Data Berobat";
-        $data = Berobat::orderBy('berobat.updated_at', 'desc')
-            ->join('pasien', 'pasien.id', '=', 'berobat.nama_pasien_id')
+        $data = Berobat::select(
+            'berobat.id as id',
+            'berobat.nama_pasien_id',
+            'pasien.id as pasien_id',
+            'pasien.nama_pasien',
+            'tanggal_berobat',
+            'keluhan',
+            'biaya',
+            'berobat.updated_at'
+            )->join('pasien', 'pasien.id', '=', 'berobat.nama_pasien_id')
+            ->orderBy('berobat.updated_at', 'desc')
             ->paginate(5);
-        // $data = Berobat::orderBy('updated_at', 'desc')->paginate(5);
         return view('berobat.index')->with([
             'data' => $data,
             'title' => $title
@@ -133,14 +141,14 @@ class BerobatController extends Controller
         $dokter = Dokter::all();
         $obat = Obat::all();
         $rs_rujuk = Rs_rujuk::all();
-        $berobat = Berobat::where('id', $id)->first();;
+        $data = Berobat::where('id', $id)->first();;
         return view('berobat.edit')->with([
             'title' => $title,
             'pasien' => $pasien,
             'dokter' => $dokter,
             'obat' => $obat,
             'rs_rujuk' => $rs_rujuk,
-            'berobat' => $berobat
+            'data' => $data
         ]);
     }
 

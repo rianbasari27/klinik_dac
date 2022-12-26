@@ -16,7 +16,7 @@ class PasienController extends Controller
     public function index()
     {
         $title = "Data Pasien";
-        $data = Pasien::orderBy('updated_at', 'desc')->paginate(5);
+        $data = Pasien::orderBy('updated_at', 'desc')->paginate(10);
         return view('pasien.index')->with([
             'data' => $data,
             'title' => $title
@@ -54,14 +54,13 @@ class PasienController extends Controller
             'jenis_kelamin' => 'required',
             'tanggal_lahir' => 'required',
             'alamat' => 'required',
-            'no_telepon' => 'required|numeric',
+            'no_telepon' => 'required',
         ],[
             'nama_pasien.required' => 'Nama pasien wajib diisi!',
             'jenis_kelamin.required' => 'Pilih salah satu jenis kelamin!',
             'tanggal_lahir.required' => 'Tanggal lahir pasien wajib diisi!',
             'alamat.required' => 'Alamat pasien wajib diisi!',
             'no_telepon.required' => 'Nomor telepon pasien wajib diisi!',
-            'no_telepon.numeric' => 'Nomor telepon harus berupa angka!',
         ]);
 
         $data = [
@@ -122,14 +121,13 @@ class PasienController extends Controller
             'jenis_kelamin' => 'required',
             'tanggal_lahir' => 'required',
             'alamat' => 'required',
-            'no_telepon' => 'required|numeric',
+            'no_telepon' => 'required',
         ],[
             'nama_pasien.required' => 'Nama pasien wajib diisi!',
             'jenis_kelamin.required' => 'Pilih salah satu jenis kelamin!',
             'tanggal_lahir.required' => 'Tanggal lahir pasien wajib diisi!',
             'alamat.required' => 'Alamat pasien wajib diisi!',
             'no_telepon.required' => 'Nomor telepon pasien wajib diisi!',
-            'no_telepon.numeric' => 'Nomor telepon harus berupa angka!',
         ]);
 
         $data = [

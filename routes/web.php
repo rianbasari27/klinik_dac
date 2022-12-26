@@ -4,6 +4,7 @@ use App\Http\Controllers\BerobatController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DokterController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\Rs_RujukController;
@@ -26,7 +27,11 @@ use App\Http\Controllers\Rs_RujukController;
 // });
 
 
+Route::get('/login', [LoginController::class, 'index']);
+Route::post('/login', [LoginController::class, 'authenticate']);
+
 Route::get('/', [HomeController::class, 'index']);
+
 Route::resource('pasien', PasienController::class);
 Route::resource('dokter', DokterController::class);
 Route::resource('obat', ObatController::class);
