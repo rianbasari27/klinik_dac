@@ -75,7 +75,7 @@
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li class="nav-item">
-                        <a href="/" class="nav-link {{ $title == 'Dashboard' ? 'active' : 'text-white' }}" aria-current="page">
+                        <a href="/dashboard" class="nav-link {{ $title == 'Dashboard' ? 'active' : 'text-white' }}" aria-current="page">
                         <i class="fas fa-tachometer-alt-fast me-3 fs-5"></i>
                         Dashboard
                         </a>
@@ -110,6 +110,13 @@
                         Rumah Sakit Rujukan
                         </a>
                     </li>
+                    <hr>
+                    <li>
+                        <form action="/logout" method="post">
+                            @csrf
+                            <button type="submit" class="nav-link text-white"><i class="fa-solid fa-right-from-bracket me-3 fs-6"></i> Logout</button>
+                        </form>
+                    </li>
                 </ul>
                 <div class="border-top footer text-white">
                     <div class="container my-3">
@@ -117,7 +124,7 @@
                     </div>
                 </div>
             </div>
-              
+            
             
             <div class="b-example-divider b-example-vr"></div>
             
@@ -125,16 +132,21 @@
                 <nav class="navbar navbar-expand-lg bg-light box shadow px-4">
                     <div class="container-fluid">
                         <span class="fw-bold">{{ $title }}</span>
-                        {{-- <a href="/login" class="btn btn-primary ms-auto">Login</a> --}}
-                        <div class="dropdown">
-                            <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                                <strong>Admin</strong>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                                <li><a class="dropdown-item" href="#">Sign out</a></li>
-                            </ul>
-                        </div>
+                        @auth
+                            <div class="dropdown">
+                                <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <strong>Hello, {{ auth()->user()->name }}!</strong>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                                    <li>
+                                        <form action="/logout" method="post">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        @endauth
                     </div>
                 </nav>
 

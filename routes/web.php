@@ -27,16 +27,17 @@ use App\Http\Controllers\Rs_RujukController;
 // });
 
 
-Route::get('/login', [LoginController::class, 'index']);
-Route::post('/login', [LoginController::class, 'authenticate']);
+Route::get('/', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/dashboard', [HomeController::class, 'index'])->middleware('auth');
 
-Route::resource('pasien', PasienController::class);
-Route::resource('dokter', DokterController::class);
-Route::resource('obat', ObatController::class);
-Route::resource('rs_rujuk', Rs_RujukController::class);
-Route::resource('berobat', BerobatController::class);
+Route::resource('pasien', PasienController::class)->middleware('auth');
+Route::resource('dokter', DokterController::class)->middleware('auth');
+Route::resource('obat', ObatController::class)->middleware('auth');
+Route::resource('rs_rujuk', Rs_RujukController::class)->middleware('auth');
+Route::resource('berobat', BerobatController::class)->middleware('auth');
 // Route::resource('/pasien/create', PasienController::class);
 
 // Route::get('/pasien', function () {

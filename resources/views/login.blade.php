@@ -76,7 +76,7 @@
             @endif
             
             <div class="mt-3 py-5 px-5 bg-light rounded-4 shadow">
-                <form action="/login" method="post">
+                <form action="/" method="post">
                     @csrf
                     <h1 class="mb-3 fw-normal">Login</h1>
                     <hr>
