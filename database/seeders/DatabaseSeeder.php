@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         Pasien::factory()->count(100)->create();
         Dokter::factory()->count(5)->create();
         Rs_rujuk::factory()->count(10)->create();
-        User::factory()->count(1)->create();
+        User::factory()->count(2)->create();
 
         // Insert tabel obat
         DB::table('obat')->insert([

@@ -18,8 +18,8 @@ class LoginController extends Controller
             'username' => 'required',
             'password' => 'required'
         ],[
-            'username.required' => 'Username wajib diisi!',
-            'password.required' => 'Password wajib diisi!',
+            'username.required' => 'Masukkan username',
+            'password.required' => 'Masukkan password',
         ]);
 
         if (Auth::attempt($credentials)){

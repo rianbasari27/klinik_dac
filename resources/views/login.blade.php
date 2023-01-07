@@ -85,7 +85,7 @@
                         <label for="username"><i class="fas fa-user pe-2"></i>Username</label>
                         @error('username')
                             <div class="invalid-feedback text-start">
-                                {{ $message }}
+                                <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
                             </div>
                         @enderror
                     </div>
@@ -95,7 +95,7 @@
                         <label for="password"><i class="fas fa-key pe-2"></i>Password</label>
                         @error('password')
                             <div class="invalid-feedback text-start">
-                                {{ $message }}
+                                <i class="fa-solid fa-circle-exclamation"></i> {{ $message }}
                             </div>
                         @enderror
                     </div>

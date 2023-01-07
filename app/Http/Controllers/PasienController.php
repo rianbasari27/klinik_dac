@@ -15,11 +15,18 @@ class PasienController extends Controller
      */
     public function index()
     {
+        // $pasien = Pasien::latest();
+        
+        
         $title = "Data Pasien";
-        $data = Pasien::orderBy('updated_at', 'desc')->paginate(10);
+        $data = Pasien::latest()->paginate(10);
+        if(request('search')) {
+            $data->where('nama_pasien', 'like', '%' . request('search') . '%');
+        }
         return view('pasien.index')->with([
             'data' => $data,
-            'title' => $title
+            'title' => $title,
+            // 'pasien' => $pasien->get(),
         ]);
     }
 

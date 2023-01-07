@@ -135,7 +135,7 @@
                         @auth
                             <div class="dropdown">
                                 <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <strong>Hello, {{ auth()->user()->name }}!</strong>
+                                    <strong><i class="fas fa-user-circle me-2"></i>{{ auth()->user()->name }}</strong>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                                     <li>
