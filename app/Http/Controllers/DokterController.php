@@ -13,13 +13,18 @@ class DokterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = "Data Dokter";
-        $data = Dokter::orderBy('updated_at', 'desc')->paginate(5);
+        if($request->has('search')) {
+            $data = Dokter::where('nama_dokter', 'like', '%' . $request->search . '%')->paginate(10);
+        }
+        else {
+            $data = Dokter::latest()->paginate(10);
+        }
         return view('dokter.index')->with([
             'data' => $data,
-            'title' => $title
+            'title' => $title,
         ]);
     }
 
@@ -42,10 +47,6 @@ class DokterController extends Controller
      */
     public function store(Request $request)
     {
-        Session::flash('nama_dokter', $request->nama_dokter);
-        Session::flash('nip', $request->nip);
-        Session::flash('sip', $request->sip);
-
         $request->validate([
             'nama_dokter' => 'required',
             'nip' => 'required|numeric',

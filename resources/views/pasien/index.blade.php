@@ -17,9 +17,9 @@
                 <p class="ps-3 text-muted">Kumpulan data pasien klinik DAC Medical Center</p>
             </div>
             <div class="col-sm-4">
-                <form action="/pasien">
+                <form action="/pasien" method="GET">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Search" name="search">
+                        <input type="search" class="form-control" placeholder="Search" name="search">
                         <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
                     </div>
                 </form>

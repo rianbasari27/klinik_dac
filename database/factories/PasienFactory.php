@@ -24,7 +24,7 @@ class PasienFactory extends Factory
             'jenis_kelamin' => Arr::random(["Laki-laki", "Perempuan"]),
             'tanggal_lahir' => $faker->date(),
             'alamat' => $faker->address(),
-            'no_telepon' => $faker->phoneNumber(),
+            'no_telepon' => '08' . $faker->numerify('##########'),
             'email' => $faker->email(),
             'created_at' => date('Y/m/d H:i:s'),
             'updated_at' => date('Y/m/d H:i:s')

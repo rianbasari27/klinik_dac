@@ -15,7 +15,7 @@
                     $i++;
                 }
                 ?>
-                <h1 class="fs-1 fw-bold text-primary"><?= $i; ?></h1>
+                <h1 class="display-2 fw-bold text-primary"><?= $i; ?></h1>
                 <div class="mt-3 mb-2">
                     <a href="/pasien">View detail</a>
                 </div>
@@ -33,7 +33,7 @@
                     $i++;
                 }
                 ?>
-                <h1 class="fs-1 fw-bold text-primary"><?= $i; ?></h1>
+                <h1 class="display-2 fw-bold text-primary"><?= $i; ?></h1>
                 <div class="mt-3 mb-2">
                     <a href="/dokter">View detail</a>
                 </div>
@@ -51,7 +51,7 @@
                     $i++;
                 }
                 ?>
-                <h1 class="fs-1 fw-bold text-primary"><?= $i; ?></h1>
+                <h1 class="display-2 fw-bold text-primary"><?= $i; ?></h1>
                 <div class="mt-3 mb-2">
                     <a href="/obat">View detail</a>
                 </div>
@@ -69,7 +69,7 @@
                     $i++;
                 }
                 ?>
-                <h1 class="fs-1 fw-bold text-primary"><?= $i; ?></h1>
+                <h1 class="display-2 fw-bold text-primary"><?= $i; ?></h1>
                 <div class="mt-3 mb-2">
                     <a href="/rs_rujuk">View detail</a>
                 </div>
@@ -87,19 +87,12 @@
                     $i++;
                 }
                 ?>
-                <h1 class="fs-1 fw-bold text-primary"><?= $i; ?></h1>
+                <h1 class="display-2 fw-bold text-primary"><?= $i; ?></h1>
                 <div class="mt-3 mb-2">
                     <a href="/berobat">View detail</a>
                 </div>
             </div>
-        </div>
-        
-        {{-- <div class="col-md-3">
-            <div class="p-3 text-center">
-                
-            </div>
-        </div> --}}
-        
+        </div>        
     </div>
 
     <div class="mx-2 mt-3 pt-4 bg-light shadow rounded">

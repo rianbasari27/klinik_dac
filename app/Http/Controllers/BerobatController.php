@@ -18,25 +18,42 @@ class BerobatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = "Data Berobat";
-        $data = Berobat::select(
-            'berobat.id as id',
-            'berobat.nama_pasien_id',
-            'pasien.id as pasien_id',
-            'pasien.nama_pasien',
-            'tanggal_berobat',
-            'keluhan',
-            'biaya',
-            'berobat.updated_at'
-            )->join('pasien', 'pasien.id', '=', 'berobat.nama_pasien_id')
-            ->orderBy('berobat.updated_at', 'desc')
-            ->paginate(5);
+        if($request->has('search')) {
+            $data = Berobat::select(
+                'berobat.id as id',
+                'berobat.nama_pasien_id',
+                'pasien.id as pasien_id',
+                'pasien.nama_pasien',
+                'tanggal_berobat',
+                'keluhan',
+                'biaya',
+                'berobat.updated_at'
+                )->join('pasien', 'pasien.id', '=', 'berobat.nama_pasien_id')
+                ->where('pasien.nama_pasien', 'like', '%' . $request->search . '%')
+                ->paginate(10);
+        }
+        else {
+            $data = Berobat::select(
+                'berobat.id as id',
+                'berobat.nama_pasien_id',
+                'pasien.id as pasien_id',
+                'pasien.nama_pasien',
+                'tanggal_berobat',
+                'keluhan',
+                'biaya',
+                'berobat.updated_at'
+                )->join('pasien', 'pasien.id', '=', 'berobat.nama_pasien_id')
+                ->orderBy('berobat.updated_at', 'desc')
+                ->paginate(10);
+        }
         return view('berobat.index')->with([
             'data' => $data,
-            'title' => $title
+            'title' => $title,
         ]);
+
     }
 
     /**
@@ -68,16 +85,6 @@ class BerobatController extends Controller
      */
     public function store(Request $request)
     {
-        Session::flash('nama_pasien_id', $request->nama_pasien_id);
-        Session::flash('tanggal_berobat', $request->tanggal_berobat);
-        Session::flash('keluhan', $request->keluhan);
-        Session::flash('nama_dokter_id', $request->nama_dokter_id);
-        Session::flash('hasil_periksa', $request->hasil_periksa);
-        Session::flash('confirm_rujuk', $request->confirm_rujuk);
-        Session::flash('nama_obat_id', $request->nama_obat_id);
-        Session::flash('nama_rs_id', $request->nama_rs_id);
-        Session::flash('biaya', $request->biaya);
-
         $request->validate([
             'nama_pasien_id' => 'required',
             'tanggal_berobat' => 'required',

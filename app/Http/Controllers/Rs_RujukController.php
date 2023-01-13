@@ -13,13 +13,18 @@ class Rs_RujukController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = "Rumah Sakit Rujukan";
-        $data = Rs_rujuk::orderBy('updated_at', 'desc')->paginate(5);
+        if($request->has('search')) {
+            $data = Rs_rujuk::where('nama_rs', 'like', '%' . $request->search . '%')->paginate(10);
+        }
+        else {
+            $data = Rs_rujuk::latest()->paginate(10);
+        }
         return view('rs_rujuk.index')->with([
             'data' => $data,
-            'title' => $title
+            'title' => $title,
         ]);
     }
 
@@ -42,9 +47,6 @@ class Rs_RujukController extends Controller
      */
     public function store(Request $request)
     {
-        Session::flash('nama_rs', $request->nama_rs);
-        Session::flash('alamat', $request->alamat);
-
         $request->validate([
             'nama_rs' => 'required',
             'alamat' => 'required',

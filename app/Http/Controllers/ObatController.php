@@ -13,13 +13,18 @@ class ObatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = "Data Obat";
-        $data = Obat::orderBy('updated_at', 'desc')->paginate(5);
+        if($request->has('search')) {
+            $data = Obat::where('nama_obat', 'like', '%' . $request->search . '%')->paginate(10);
+        }
+        else {
+            $data = Obat::latest()->paginate(10);
+        }
         return view('obat.index')->with([
+            'data' => $data,
             'title' => $title,
-            'data' => $data
         ]);
     }
 
@@ -42,12 +47,6 @@ class ObatController extends Controller
      */
     public function store(Request $request)
     {
-        Session::flash('nama_obat', $request->nama_obat);
-        Session::flash('jenis', $request->jenis);
-        Session::flash('deskripsi', $request->deskripsi);
-        Session::flash('tanggal_exp', $request->tanggal_exp);
-        Session::flash('stok', $request->stok);
-
         $request->validate([
             'nama_obat' => 'required',
             'jenis' => 'required',

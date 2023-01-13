@@ -13,20 +13,18 @@ class PasienController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        // $pasien = Pasien::latest();
-        
-        
+    public function index(Request $request)
+    {    
         $title = "Data Pasien";
-        $data = Pasien::latest()->paginate(10);
-        if(request('search')) {
-            $data->where('nama_pasien', 'like', '%' . request('search') . '%');
+        if($request->has('search')) {
+            $data = Pasien::where('nama_pasien', 'like', '%' . $request->search . '%')->paginate(10);
+        }
+        else {
+            $data = Pasien::latest()->paginate(10);
         }
         return view('pasien.index')->with([
             'data' => $data,
             'title' => $title,
-            // 'pasien' => $pasien->get(),
         ]);
     }
 
@@ -49,25 +47,19 @@ class PasienController extends Controller
      */
     public function store(Request $request)
     {
-        Session::flash('nama_pasien', $request->nama_pasien);
-        Session::flash('jenis_kelamin', $request->jenis_kelamin);
-        Session::flash('tanggal_lahir', $request->tanggal_lahir);
-        Session::flash('alamat', $request->alamat);
-        Session::flash('no_telepon', $request->no_telepon);
-        Session::flash('email', $request->email);
-
         $request->validate([
             'nama_pasien' => 'required',
             'jenis_kelamin' => 'required',
             'tanggal_lahir' => 'required',
             'alamat' => 'required',
-            'no_telepon' => 'required',
+            'no_telepon' => 'required|numeric',
         ],[
             'nama_pasien.required' => 'Nama pasien wajib diisi!',
             'jenis_kelamin.required' => 'Pilih salah satu jenis kelamin!',
             'tanggal_lahir.required' => 'Tanggal lahir pasien wajib diisi!',
             'alamat.required' => 'Alamat pasien wajib diisi!',
             'no_telepon.required' => 'Nomor telepon pasien wajib diisi!',
+            'no_telepon.numeric' => 'Nomor telepon harus berupa angka!',
         ]);
 
         $data = [
@@ -128,13 +120,14 @@ class PasienController extends Controller
             'jenis_kelamin' => 'required',
             'tanggal_lahir' => 'required',
             'alamat' => 'required',
-            'no_telepon' => 'required',
+            'no_telepon' => 'required|numeric',
         ],[
             'nama_pasien.required' => 'Nama pasien wajib diisi!',
             'jenis_kelamin.required' => 'Pilih salah satu jenis kelamin!',
             'tanggal_lahir.required' => 'Tanggal lahir pasien wajib diisi!',
             'alamat.required' => 'Alamat pasien wajib diisi!',
             'no_telepon.required' => 'Nomor telepon pasien wajib diisi!',
+            'no_telepon.numeric' => 'Nomor telepon harus berupa angka!',
         ]);
 
         $data = [

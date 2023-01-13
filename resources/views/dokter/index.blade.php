@@ -17,10 +17,12 @@
                 <p class="ps-3 text-muted">Kumpulan data dokter klinik DAC Medical Center</p>
             </div>
             <div class="col-sm-4">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search">
-                    <button class="btn btn-primary" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
-                </div>
+                <form action="/dokter" method="GET">
+                    <div class="input-group mb-3">
+                        <input type="search" class="form-control" placeholder="Search" name="search">
+                        <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
             </div>
             <div class="col-sm-2">
                 <a href="/dokter/create" class="btn btn-primary"><i class="fas fa-plus"></i> Data baru</a>
